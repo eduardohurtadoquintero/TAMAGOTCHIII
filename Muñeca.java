@@ -3,8 +3,8 @@ import javax.swing.*;
 public class Muñeca extends Tamagotchi implements TamagotchiActions {
     private ImageIcon imagen;
 
-    public Muñeca(int hambre, int energia, int felicidad, String nombre) {
-        super(hambre, energia, felicidad, nombre);
+    public Muñeca(int hambre, int energia, int felicidad, String nombre, int comidasconsecutivas) {
+        super(hambre, energia, felicidad, nombre,comidasconsecutivas);
         imagen = new ImageIcon(getClass().getResource("/muniecafeliz.JPG"));
     }
 
@@ -13,17 +13,17 @@ public class Muñeca extends Tamagotchi implements TamagotchiActions {
     void emocion() {
         int totalStats = felicidad + hambre + energia;
 
-        if (!feliz && totalStats >= 150) {
+        if (!feliz && totalStats >= 210) {
             System.out.println("¡Me siento muy feliz!");
             feliz = true;
             aburrido = false;
             triste = false;
-        } else if (!aburrido && totalStats >= 116 && totalStats < 150) {
+        } else if (!aburrido && totalStats >= 160 && totalStats < 210) {
             System.out.println("Estoy aburrida...");
             feliz = false;
             aburrido = true;
             triste = false;
-        } else if (!triste && totalStats <= 115) {
+        } else if (!triste && totalStats < 160) {
             System.out.println("La muñeca se puso a llorar :<");
             feliz = false;
             aburrido = false;
@@ -44,6 +44,7 @@ public class Muñeca extends Tamagotchi implements TamagotchiActions {
             System.out.println("Se aburrió algo rápido");
             energia -= 20;
         }
+        comidasconsecutivas=0;
         emocion();
         validarEstados();
         actualizarEstadoEmocional();
@@ -73,6 +74,8 @@ public class Muñeca extends Tamagotchi implements TamagotchiActions {
             }
             System.out.println("Alimentado con: " + alimento);
         }
+        comidasconsecutivas++;
+        verifyDiet();
         emocion();
         validarEstados();
         actualizarEstadoEmocional();
@@ -91,6 +94,8 @@ public class Muñeca extends Tamagotchi implements TamagotchiActions {
         felicidad -= 15;
         hambre -= 20;
         System.out.println("La muñeca duerme pacíficamente");
+        comidasconsecutivas = 0;
+        verifyDiet();
         validarEstados();
         emocion();
     }

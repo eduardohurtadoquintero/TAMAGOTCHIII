@@ -5,8 +5,8 @@ public class Cuyo extends Tamagotchi implements TamagotchiActions{
 
     private ImageIcon imagen;
 
-    public Cuyo(int hambre, int energia, int felicidad, String nombre) {
-        super(hambre, energia, felicidad, nombre);
+    public Cuyo(int hambre, int energia, int felicidad, String nombre,int comidasconsecutivas) {
+        super(hambre, energia, felicidad, nombre,comidasconsecutivas);
         imagen = new ImageIcon(getClass().getResource("/cuyofeliz.JPG"));
     }
 
@@ -67,6 +67,7 @@ public class Cuyo extends Tamagotchi implements TamagotchiActions{
             felicidad -= 20;
             energia -= 10;
         }
+        comidasconsecutivas=0;
         emocion();
         validarEstados();
     }
@@ -97,6 +98,8 @@ public class Cuyo extends Tamagotchi implements TamagotchiActions{
                 System.out.println("Alimento no válido: " + alimento);
         }
         System.out.println("Alimentado con: " + alimento);
+        comidasconsecutivas ++;
+        verifyDiet();
         emocion();
         validarEstados();
     }
@@ -115,6 +118,7 @@ public class Cuyo extends Tamagotchi implements TamagotchiActions{
             energia += 40;
             hambre -= 30;
             felicidad -= 14;
+            comidasconsecutivas=0;
             emocion();
             validarEstados();
     }

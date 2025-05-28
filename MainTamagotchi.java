@@ -125,16 +125,16 @@ public class MainTamagotchi {
     private void setMascota(String tipo, String nombre) {
         switch (tipo.toLowerCase()) {
             case "cuyo":
-                mascota = new Cuyo(50, 50, 50, nombre);
+                mascota = new Cuyo(50, 50, 50, nombre, 0);
                 break;
             case "muñeca":
-                mascota = new Muñeca(50, 50, 50, nombre);
+                mascota = new Muñeca(50, 50, 50, nombre, 0);
                 break;
             case "gato":
-                mascota = new Gato(50, 50, 50, nombre);
+                mascota = new Gato(50, 50, 50, nombre, 0);
                 break;
             case "perro":
-                mascota = new Perro(50, 50, 50, nombre);
+                mascota = new Perro(50, 50, 50, nombre,0);
                 break;
             default:
                 JOptionPane.showMessageDialog(frame, "Tipo no reconocido");

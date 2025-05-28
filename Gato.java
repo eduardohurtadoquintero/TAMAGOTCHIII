@@ -5,8 +5,8 @@ import java.awt.Image;
 public class Gato extends Tamagotchi implements TamagotchiActions{
     private ImageIcon imagen;
 
-    public Gato(int hambre, int energia, int felicidad, String nombre) {
-        super(hambre, energia, felicidad, nombre);
+    public Gato(int hambre, int energia, int felicidad, String nombre, int comidasconsecutivas) {
+        super(hambre, energia, felicidad, nombre,comidasconsecutivas);
         imagen = new ImageIcon(getClass().getResource("/gatofeliz.JPG"));
     }
 
@@ -70,6 +70,7 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
             System.out.println("El gato jugó " + tipoJuego + " y no lo disfrutó. Ahora está molesto :0");
 
         }
+        comidasconsecutivas = 0;
         emocion();
         validarEstados();
     }
@@ -100,7 +101,9 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
         }
 
         System.out.println("El gato ha sido alimentado con: " + alimento);
+        comidasconsecutivas++;
         emocion();
+        verifyDiet();
         validarEstados();
     }
 
@@ -118,6 +121,7 @@ public class Gato extends Tamagotchi implements TamagotchiActions{
         energia += 40;
         hambre -= 30;
         felicidad -= 14;
+        comidasconsecutivas=0;
         emocion();
         validarEstados();
     }

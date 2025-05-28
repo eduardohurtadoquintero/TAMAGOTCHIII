@@ -10,14 +10,16 @@ public abstract class Tamagotchi {
     boolean triste = false;
     boolean aburrido = false;
     boolean feliz = true;
+    protected int comidasconsecutivas;
 
-    public Tamagotchi(int hambre, int energia, int felicidad, String nombre) {
+    public Tamagotchi(int hambre, int energia, int felicidad, String nombre, int comidasconsecutivas) {
         this.hambre = hambre;
         this.energia = energia;
         this.felicidad = felicidad;
         this.sano = true;
-        this.vivo = true;  // <<--- Inicializa vivo en true
+        this.vivo = true;
         this.nombre = nombre;
+        this.comidasconsecutivas = 0;
     }
     abstract void emocion();
     abstract void Jugar();
@@ -25,8 +27,6 @@ public abstract class Tamagotchi {
     abstract void enfermar();
     abstract void dormir();
     public abstract ImageIcon getImagenActual();
-
-
 
     protected void validarEstados() {
         hambre = Math.max(0, Math.min(hambre, 100));
@@ -73,4 +73,12 @@ public abstract class Tamagotchi {
         return nombre;
     }
 
+    public void verifyDiet() {
+        if (comidasconsecutivas >= 5) {
+            morir();
+        }
+        if (comidasconsecutivas == 4){
+            System.out.println(""+nombre+ "se ve ya muy lleno....");
+        }
     }
+}

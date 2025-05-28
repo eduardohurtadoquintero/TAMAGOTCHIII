@@ -4,15 +4,15 @@ import java.util.Random;
 public class Perro extends Tamagotchi implements TamagotchiActions {
     private ImageIcon imagen;
 
-    public Perro(int hambre, int energia, int felicidad, String nombre) {
-        super(hambre, energia, felicidad, nombre);
+    public Perro(int hambre, int energia, int felicidad, String nombre, int comidasconsecutivas) {
+        super(hambre, energia, felicidad, nombre,comidasconsecutivas);
         imagen = new ImageIcon(getClass().getResource("/perrofeliz.JPG"));
     }
 
     @Override
     void emocion() {
         int totalStats = felicidad + hambre + energia;
-        if (!feliz && felicidad > 50 && totalStats >= 150) {
+        if (!feliz && felicidad > 50 && totalStats >= 190) {
             System.out.println("El perrito mueve su cola de felicidad!");
             feliz = true;
             aburrido = false;
@@ -62,6 +62,7 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
             default:
                 System.out.println("Juego no válido: " + tipoJuego);
         }
+        comidasconsecutivas = 0;
         emocion();
         validarEstados();
     }
@@ -92,8 +93,10 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
         }
 
         System.out.println("Alimentado con: " + alimento);
+        comidasconsecutivas ++;
         emocion();
         validarEstados();
+        verifyDiet();
     }
 
     @Override
@@ -109,6 +112,7 @@ public class Perro extends Tamagotchi implements TamagotchiActions {
         energia += 40;
         hambre -= 30;
         felicidad -= 10;
+        comidasconsecutivas=0;
         validarEstados();
         emocion();
     }
